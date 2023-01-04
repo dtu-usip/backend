@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { COURSE } from "../utils/constants";
+import { COURSE } from "../utils/models";
 
 export interface CourseType extends mongoose.Document {
   course: string;

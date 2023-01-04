@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { USER } from "../utils/constants";
+import { USER } from "../../utils/models";
 
 export interface UserType extends mongoose.Document {
   username: string;
@@ -26,6 +26,7 @@ const userSchema = new Schema(
     role: {
       type: Number,
       required: true,
+      enum: [0, 1], // 0 -> student, 1 -> staff
     },
     courses: {
       type: Array,
@@ -43,5 +44,5 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-const user = mongoose.model<UserType>(USER, userSchema);
-export default user;
+const User = mongoose.model<UserType>(USER, userSchema);
+export default User;

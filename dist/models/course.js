@@ -24,7 +24,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
-const constants_1 = require("../utils/constants");
+const models_1 = require("../utils/models");
 const courseSchema = new mongoose_1.Schema({
     course: {
         type: String,
@@ -44,6 +44,6 @@ const courseSchema = new mongoose_1.Schema({
         required: true,
     },
 }, { timestamps: true });
-const course = mongoose_1.default.model(constants_1.COURSE, courseSchema);
+const course = mongoose_1.default.model(models_1.COURSE, courseSchema);
 exports.default = course;
 //# sourceMappingURL=course.js.map

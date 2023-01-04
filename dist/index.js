@@ -55,7 +55,5 @@ const port = process.env.PORT || 4000;
 app.listen(port, () => {
     // tslint:disable-next-line:no-console
     console.log(`server started at http://localhost:${port}`);
-    // tslint:disable-next-line:no-console
-    console.log(`View Admin Panel at http://localhost:${port}/admin`);
 });
 //# sourceMappingURL=index.js.map

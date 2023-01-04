@@ -4,7 +4,8 @@
   "jsRules": {},
   "rules": {
     "trailing-comma": [false],
-    "variable-name": [true, "allow-snake-case"]
+    "variable-name": [true, "allow-snake-case", "allow-pascal-case"],
+    "no-console": false
   },
   "rulesDirectory": []
 }
