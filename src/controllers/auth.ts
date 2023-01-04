@@ -121,7 +121,7 @@ export const updatePassword = async (
   next: NextFunction
 ) => {
   try {
-    const userId = "userId";
+    const userId = req?.user?._id;
     const { password, newPassword } = req.body;
     if (password !== newPassword) {
       next(new ExpressError("Passwords don't match", 400));
@@ -152,7 +152,7 @@ export const updateInfo = async (
   next: NextFunction
 ) => {
   try {
-    const userId = "userId";
+    const userId = req?.user?._id;
     const { email, phone } = req.body;
 
     await User.findByIdAndUpdate(userId, {

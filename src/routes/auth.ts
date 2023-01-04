@@ -12,8 +12,8 @@ const router = express.Router();
 
 router.route("/").post(login).get(logout);
 
-router.route("/password").post(updatePassword);
-router.route("/info").post(updateInfo);
+router.route("/password").post(isLoggedIn, updatePassword);
+router.route("/info").post(isLoggedIn, updateInfo);
 
 router.route("/refreshToken").get(isLoggedIn, refreshToken);
 router.route("/generateTokens").get(isLoggedIn, generateTokens);
