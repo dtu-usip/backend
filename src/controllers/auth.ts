@@ -69,8 +69,6 @@ export const login = async (
       return;
     }
 
-    const role = user.role ? "student" : "staff";
-
     const response = await createSession(
       user,
       req?.device?.type?.toLowerCase(),
@@ -79,7 +77,7 @@ export const login = async (
 
     res.status(200).json({
       success: true,
-      user: { ...user, role },
+      user,
       access: response.access,
       refresh: response.refresh,
     });
@@ -96,7 +94,7 @@ export const logout = async (
   next: NextFunction
 ) => {
   try {
-    const sessionId: string = req.session._id;
+    const sessionId: string = req.custom_session._id;
 
     await Session.findByIdAndUpdate(sessionId, { isActive: false });
 
@@ -134,6 +132,8 @@ export const updatePassword = async (
     await User.findByIdAndUpdate(userId, {
       password: new_password,
     });
+
+    console.log("updated");
 
     res.status(200).json({
       success: true,
@@ -206,7 +206,7 @@ export const generateTokens = async (
   try {
     const tokenType = req?.token?.type;
     const userId = req?.user?._id;
-    const sessionId = req?.session?._id;
+    const sessionId = req?.custom_session?._id;
 
     if (tokenType !== ACCESS_TOKEN) {
       next(new ExpressError("Invalid Token Type", 400));
@@ -240,7 +240,7 @@ export const refreshToken = async (
   try {
     const tokenType = req?.token?.type;
     const userId = req?.user?._id;
-    const sessionId = req?.session?._id;
+    const sessionId = req?.custom_session?._id;
 
     if (tokenType !== REFRESH_TOKEN) {
       next(new ExpressError("Invalid Token Type", 400));

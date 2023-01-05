@@ -6,7 +6,7 @@ declare global {
   namespace Express {
     interface Request {
       device?: any;
-      session?: SessionType;
+      custom_session?: SessionType;
       token?: TokenType;
       user?: UserType;
     }

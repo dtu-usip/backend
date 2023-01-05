@@ -18,7 +18,7 @@ export const isLoggedIn = async (
   try {
     const tokenInDb: TokenType = await Token.findOne({
       token,
-    }).populate(SESSION);
+    }).populate("session");
     if (!tokenInDb) {
       next(new ExpressError("Invalid Token", 400));
       return;
@@ -51,7 +51,7 @@ export const isLoggedIn = async (
       return;
     }
 
-    req.session =
+    req.custom_session =
       tokenInDb.session instanceof Session
         ? (tokenInDb.session as SessionType)
         : null;
