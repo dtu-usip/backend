@@ -37,5 +37,5 @@ const enrollmentSchema = new Schema(
   { timestamps: true }
 );
 
-const enrollment = mongoose.model<EnrollmentType>(PAYMENT, enrollmentSchema);
-export default enrollment;
+const Enrollment = mongoose.model<EnrollmentType>(PAYMENT, enrollmentSchema);
+export default Enrollment;

@@ -39,5 +39,5 @@ const studentSchema = new Schema(
   { timestamps: true }
 );
 
-const student = mongoose.model<StudentType>(STUDENT, studentSchema);
-export default student;
+const Student = mongoose.model<StudentType>(STUDENT, studentSchema);
+export default Student;

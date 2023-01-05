@@ -50,5 +50,5 @@ const teacherSchema = new Schema(
   { timestamps: true }
 );
 
-const teacher = mongoose.model<TeacherType>(TEACHER, teacherSchema);
-export default teacher;
+const Teacher = mongoose.model<TeacherType>(TEACHER, teacherSchema);
+export default Teacher;
