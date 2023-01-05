@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import { COURSE, USER } from "../utils/models";
 import Enrollment, { EnrollmentType } from "../models/enrollment";
 import ExpressError from "../utils/ExpressError";
 
@@ -9,14 +8,23 @@ export const viewGrades = async (
   next: NextFunction
 ) => {
   try {
-    const { id } = req.user;
+    const { id } = req.query;
 
     const enrollments: EnrollmentType[] = await Enrollment.find({
       user_id: id,
-    }).populate([USER, COURSE]);
+    }).populate([
+      {
+        path: "user",
+        match: {
+          role: "student",
+        },
+        strictPopulate: true,
+      },
+      "course",
+    ]);
 
     res.status(200).json({
-      enrollments,
+      grades: enrollments.filter((e) => e.user !== null),
     });
   } catch (e) {
     console.log("There was an error>> ", e);
@@ -34,14 +42,23 @@ export const totalNumberOfGrades = async (
   next: NextFunction
 ) => {
   try {
-    const { id } = req.user;
+    const { id } = req.query;
 
     const enrollments: EnrollmentType[] = await Enrollment.find({
       user_id: id,
-    }).populate([USER, COURSE]);
+    }).populate([
+      {
+        path: "user",
+        match: {
+          role: "student",
+        },
+        strictPopulate: true,
+      },
+      "course",
+    ]);
 
     res.status(200).json({
-      enrollments,
+      grades: enrollments.filter((e) => e.user !== null),
     });
   } catch (e) {
     console.log("There was an error>> ", e);
@@ -112,7 +129,7 @@ export const removeGrade = async (
   next: NextFunction
 ) => {
   try {
-    const { course_id, user_id, mte_score, ete_score } = req.body;
+    const { course_id, user_id } = req.query;
 
     const enrollment: EnrollmentType = await Enrollment.findOne({
       course_id,

@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import { COURSE, USER } from "../utils/models";
 import Enrollment, { EnrollmentType } from "../models/enrollment";
 import ExpressError from "../utils/ExpressError";
 

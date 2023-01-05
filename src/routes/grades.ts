@@ -13,8 +13,8 @@ router
   .route("/")
   .get(isLoggedIn, viewGrades)
   .post(isLoggedIn, addGrade)
-  .put(isLoggedIn, updateGrade);
+  .put(isLoggedIn, updateGrade)
+  .delete(isLoggedIn, removeGrade);
 router.route("/totalCount").get(isLoggedIn, totalNumberOfGrades);
-router.route("/remove").get(isLoggedIn, removeGrade);
 
 export = router;
