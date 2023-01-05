@@ -2,8 +2,8 @@ import mongoose, { Schema, Types } from "mongoose";
 import { COURSE, ENROLLMENT, PAYMENT, SEMESTER, USER } from "../utils/models";
 
 export interface EnrollmentType extends mongoose.Document {
-  course_id: Types.ObjectId;
-  user_id: Types.ObjectId;
+  course: Types.ObjectId;
+  user: Types.ObjectId;
   mte_score: number;
   ete_score: number;
   createdAt: Date;
@@ -12,12 +12,12 @@ export interface EnrollmentType extends mongoose.Document {
 
 const enrollmentSchema = new Schema(
   {
-    course_id: {
+    course: {
       type: Schema.Types.ObjectId,
       ref: COURSE,
       required: true,
     },
-    user_id: {
+    user: {
       type: Schema.Types.ObjectId,
       ref: USER,
       required: true,
