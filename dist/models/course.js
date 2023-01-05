@@ -31,19 +31,7 @@ const courseSchema = new mongoose_1.Schema({
         required: true,
         unique: true,
     },
-    lab_grades: {
-        type: Array,
-        required: true,
-    },
-    hw_grades: {
-        type: Array,
-        required: true,
-    },
-    students: {
-        type: Array,
-        required: true,
-    },
 }, { timestamps: true });
-const course = mongoose_1.default.model(models_1.COURSE, courseSchema);
-exports.default = course;
+const Course = mongoose_1.default.model(models_1.COURSE, courseSchema);
+exports.default = Course;
 //# sourceMappingURL=course.js.map

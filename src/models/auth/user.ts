@@ -31,7 +31,8 @@ const userSchema = new Schema(
       required: true,
     },
     role: {
-      type: ROLE,
+      type: String,
+      enum: ROLE,
       required: true,
     },
     phone: {

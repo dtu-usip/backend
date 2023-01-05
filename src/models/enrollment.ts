@@ -1,5 +1,5 @@
 import mongoose, { Schema, Types } from "mongoose";
-import { COURSE, PAYMENT, SEMESTER, USER } from "../utils/models";
+import { COURSE, ENROLLMENT, PAYMENT, SEMESTER, USER } from "../utils/models";
 
 export interface EnrollmentType extends mongoose.Document {
   course_id: Types.ObjectId;
@@ -37,5 +37,5 @@ const enrollmentSchema = new Schema(
   { timestamps: true }
 );
 
-const Enrollment = mongoose.model<EnrollmentType>(PAYMENT, enrollmentSchema);
+const Enrollment = mongoose.model<EnrollmentType>(ENROLLMENT, enrollmentSchema);
 export default Enrollment;

@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import User, { UserType } from "../models/auth/user";
 import Token, { TokenType } from "../models/auth/token";
 import Session, { SessionType } from "../models/auth/session";
+import { SESSION } from "../utils/models";
 
 export const isLoggedIn = async (
   req: Request,
@@ -17,7 +18,7 @@ export const isLoggedIn = async (
   try {
     const tokenInDb: TokenType = await Token.findOne({
       token,
-    }).populate("session");
+    }).populate(SESSION);
     if (!tokenInDb) {
       next(new ExpressError("Invalid Token", 400));
       return;

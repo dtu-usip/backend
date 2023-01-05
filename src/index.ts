@@ -3,7 +3,13 @@ import express, { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 import ExpressError from "./utils/ExpressError";
 import Cors from "cors";
+import session from "express-session";
 import morgan from "morgan";
+
+// Admin Bro for UI
+import AdminBro from "admin-bro";
+import options from "./admin.options";
+import buildAdminRouter from "./admin.router";
 
 // Route imports
 import routes from "./routes";
@@ -11,6 +17,20 @@ import routes from "./routes";
 dotenv.config();
 
 const app = express();
+
+// Admin Bro
+const admin = new AdminBro(options);
+const adminRouter = buildAdminRouter(admin);
+
+app.use(admin.options.rootPath, adminRouter);
+
+app.use(
+  session({
+    secret: process.env.COOKIE_SECRET || "secret",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 
 app.enable("trust proxy");
 app.use(morgan("common"));
@@ -62,6 +82,6 @@ app.use(
 const port = process.env.PORT || 4000;
 // start the express server
 app.listen(port, () => {
-  // tslint:disable-next-line:no-console
   console.log(`server started at http://localhost:${port}`);
+  console.log(`View Admin Dashboard at http://localhost:${port}/admin`);
 });

@@ -25,6 +25,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
 const models_1 = require("../../utils/models");
+var ROLE;
+(function (ROLE) {
+    ROLE["STUDENT"] = "student";
+    ROLE["TEACHER"] = "teacher";
+})(ROLE || (ROLE = {}));
 const userSchema = new mongoose_1.Schema({
     username: {
         type: String,
@@ -36,12 +41,8 @@ const userSchema = new mongoose_1.Schema({
         required: true,
     },
     role: {
-        type: Number,
-        required: true,
-        enum: [0, 1], // 0 -> student, 1 -> staff
-    },
-    courses: {
-        type: Array,
+        type: String,
+        enum: ROLE,
         required: true,
     },
     phone: {
@@ -51,6 +52,15 @@ const userSchema = new mongoose_1.Schema({
     email: {
         type: String,
         required: true,
+    },
+    first_name: {
+        type: String,
+    },
+    last_name: {
+        type: String,
+    },
+    full_name: {
+        type: String,
     },
 }, { timestamps: true });
 const User = mongoose_1.default.model(models_1.USER, userSchema);

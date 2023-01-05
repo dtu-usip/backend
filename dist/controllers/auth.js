@@ -97,8 +97,9 @@ const logout = (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
 });
 exports.logout = logout;
 const updatePassword = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    var _c;
     try {
-        const userId = "userId";
+        const userId = (_c = req === null || req === void 0 ? void 0 : req.user) === null || _c === void 0 ? void 0 : _c._id;
         const { password, newPassword } = req.body;
         if (password !== newPassword) {
             next(new ExpressError_1.default("Passwords don't match", 400));
@@ -122,8 +123,9 @@ const updatePassword = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
 });
 exports.updatePassword = updatePassword;
 const updateInfo = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    var _d;
     try {
-        const userId = "userId";
+        const userId = (_d = req === null || req === void 0 ? void 0 : req.user) === null || _d === void 0 ? void 0 : _d._id;
         const { email, phone } = req.body;
         yield user_1.default.findByIdAndUpdate(userId, {
             email,
@@ -161,11 +163,11 @@ const createSession = (user, device = "desktop", ip) => __awaiter(void 0, void 0
 });
 exports.createSession = createSession;
 const generateTokens = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    var _c, _d, _e;
+    var _e, _f, _g;
     try {
-        const tokenType = (_c = req === null || req === void 0 ? void 0 : req.token) === null || _c === void 0 ? void 0 : _c.type;
-        const userId = (_d = req === null || req === void 0 ? void 0 : req.user) === null || _d === void 0 ? void 0 : _d._id;
-        const sessionId = (_e = req === null || req === void 0 ? void 0 : req.session) === null || _e === void 0 ? void 0 : _e._id;
+        const tokenType = (_e = req === null || req === void 0 ? void 0 : req.token) === null || _e === void 0 ? void 0 : _e.type;
+        const userId = (_f = req === null || req === void 0 ? void 0 : req.user) === null || _f === void 0 ? void 0 : _f._id;
+        const sessionId = (_g = req === null || req === void 0 ? void 0 : req.session) === null || _g === void 0 ? void 0 : _g._id;
         if (tokenType !== constants_1.ACCESS_TOKEN) {
             next(new ExpressError_1.default("Invalid Token Type", 400));
         }
@@ -189,11 +191,11 @@ const generateTokens = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
 });
 exports.generateTokens = generateTokens;
 const refreshToken = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    var _f, _g, _h;
+    var _h, _j, _k;
     try {
-        const tokenType = (_f = req === null || req === void 0 ? void 0 : req.token) === null || _f === void 0 ? void 0 : _f.type;
-        const userId = (_g = req === null || req === void 0 ? void 0 : req.user) === null || _g === void 0 ? void 0 : _g._id;
-        const sessionId = (_h = req === null || req === void 0 ? void 0 : req.session) === null || _h === void 0 ? void 0 : _h._id;
+        const tokenType = (_h = req === null || req === void 0 ? void 0 : req.token) === null || _h === void 0 ? void 0 : _h.type;
+        const userId = (_j = req === null || req === void 0 ? void 0 : req.user) === null || _j === void 0 ? void 0 : _j._id;
+        const sessionId = (_k = req === null || req === void 0 ? void 0 : req.session) === null || _k === void 0 ? void 0 : _k._id;
         if (tokenType !== constants_1.REFRESH_TOKEN) {
             next(new ExpressError_1.default("Invalid Token Type", 400));
         }

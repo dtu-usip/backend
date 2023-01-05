@@ -18,7 +18,8 @@ const semesterSchema = new Schema({
     required: true,
   },
   type: {
-    type: SEM_TYPE,
+    type: String,
+    enum: SEM_TYPE,
     required: true,
   },
   number: {

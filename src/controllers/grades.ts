@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { COURSE, USER } from "../utils/models";
 import Enrollment, { EnrollmentType } from "../models/enrollment";
 import ExpressError from "../utils/ExpressError";
 
@@ -12,7 +13,7 @@ export const viewGrades = async (
 
     const enrollments: EnrollmentType[] = await Enrollment.find({
       user_id: id,
-    }).populate("user", "course");
+    }).populate([USER, COURSE]);
 
     res.status(200).json({
       enrollments,
@@ -32,16 +33,16 @@ export const totalNumberOfGrades = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { id } = req.user;
-
-  const enrollments: EnrollmentType[] = await Enrollment.find({
-    user_id: id,
-  }).populate("user", "course");
-
-  res.status(200).json({
-    enrollments,
-  });
   try {
+    const { id } = req.user;
+
+    const enrollments: EnrollmentType[] = await Enrollment.find({
+      user_id: id,
+    }).populate([USER, COURSE]);
+
+    res.status(200).json({
+      enrollments,
+    });
   } catch (e) {
     console.log("There was an error>> ", e);
     next(new ExpressError("There was an error", 500, e));

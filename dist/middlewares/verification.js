@@ -18,13 +18,14 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const user_1 = __importDefault(require("../models/auth/user"));
 const token_1 = __importDefault(require("../models/auth/token"));
 const session_1 = __importDefault(require("../models/auth/session"));
+const models_1 = require("../utils/models");
 const isLoggedIn = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const secret = process.env.JWT_SECRET;
     const token = req.headers.token;
     try {
         const tokenInDb = yield token_1.default.findOne({
             token,
-        }).populate("session");
+        }).populate(models_1.SESSION);
         if (!tokenInDb) {
             next(new ExpressError_1.default("Invalid Token", 400));
             return;
