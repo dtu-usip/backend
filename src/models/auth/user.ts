@@ -1,13 +1,20 @@
 import mongoose, { Schema } from "mongoose";
 import { USER } from "../../utils/models";
 
+enum ROLE {
+  STUDENT = "student",
+  TEACHER = "teacher",
+}
+
 export interface UserType extends mongoose.Document {
   username: string;
   password: string;
-  role: number;
-  courses: any[];
+  role: ROLE;
   phone: string;
   email: string;
+  first_name: string;
+  last_name: string;
+  full_name: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -24,12 +31,7 @@ const userSchema = new Schema(
       required: true,
     },
     role: {
-      type: Number,
-      required: true,
-      enum: [0, 1], // 0 -> student, 1 -> staff
-    },
-    courses: {
-      type: Array,
+      type: ROLE,
       required: true,
     },
     phone: {
@@ -39,6 +41,15 @@ const userSchema = new Schema(
     email: {
       type: String,
       required: true,
+    },
+    first_name: {
+      type: String,
+    },
+    last_name: {
+      type: String,
+    },
+    full_name: {
+      type: String,
     },
   },
   { timestamps: true }
