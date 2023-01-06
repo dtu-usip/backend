@@ -94,7 +94,7 @@ export const logout = async (
   next: NextFunction
 ) => {
   try {
-    const sessionId: string = req.custom_session._id;
+    const sessionId: string = req?.custom_session?._id;
 
     await Session.findByIdAndUpdate(sessionId, { isActive: false });
 

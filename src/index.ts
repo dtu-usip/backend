@@ -67,15 +67,15 @@ app.use(
   (err: ExpressError, req: Request, res: Response, next: NextFunction) => {
     const { statusCode = 500 } = err;
     if (!err.message) err.message = "Oh No, Something Went Wrong!";
-    if (
-      statusCode === 403 ||
-      statusCode === 404 ||
-      process.env.NODE_ENV !== "production"
-    ) {
+    // if (
+    //   statusCode === 403 ||
+    //   statusCode === 404 ||
+    //   process.env.NODE_ENV !== "production"
+    // ) {
       res.status(statusCode).send({ err });
-    } else {
-      res.status(500).send({ success: false, message: "Something went wrong" });
-    }
+    // } else {
+    //   res.status(500).send({ success: false, message: "Something went wrong" });
+    // }
   }
 );
 
