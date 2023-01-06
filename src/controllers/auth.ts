@@ -63,7 +63,7 @@ export const login = async (
       return;
     }
 
-    const validPassword = compare(password, user.password);
+    const validPassword = await compare(password, user.password);
     if (!validPassword) {
       next(new ExpressError("Invalid credentials", 403));
       return;
