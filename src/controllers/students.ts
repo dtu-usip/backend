@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import Course, { CourseType } from "../models/course";
 import Enrollment, { EnrollmentType } from "../models/enrollment";
 import ExpressError from "../utils/ExpressError";
 
@@ -54,6 +55,8 @@ export const studentsInCourse = async (
     const results = parseInt(resultsPerPage.toString() ?? "10", 10);
     const page = parseInt(pageNumber.toString() ?? "0", 10);
 
+    const course: CourseType = await Course.findById(courseId);
+
     const students: EnrollmentType[] = await Enrollment.find({
       course: courseId,
     })
@@ -72,6 +75,7 @@ export const studentsInCourse = async (
 
     res.status(200).json({
       students: students.filter((e) => e.user !== null),
+      course,
     });
   } catch (e) {
     console.log("There was an error>> ", e);

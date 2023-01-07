@@ -121,19 +121,20 @@ export const updatePassword = async (
   try {
     const userId = req?.user?._id;
     const { password, newPassword } = req.body;
-    if (password !== newPassword) {
-      next(new ExpressError("Passwords don't match", 400));
+    const user: UserType = await User.findById(userId);
+
+    const validPassword = await compare(password, user.password);
+
+    if (!validPassword) {
+      next(new ExpressError("Invalid Password", 400));
       return;
     }
 
     const salt = await genSalt(10);
-    const new_password = await hash(req.body.password, salt);
+    const new_password = await hash(newPassword, salt);
 
-    await User.findByIdAndUpdate(userId, {
-      password: new_password,
-    });
-
-    console.log("updated");
+    user.password = new_password;
+    await user.save();
 
     res.status(200).json({
       success: true,

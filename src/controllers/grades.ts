@@ -76,8 +76,8 @@ export const addGrade = async (
     const { course_id, user_id, mte_score, ete_score } = req.body;
 
     const enrollment: EnrollmentType = await Enrollment.findOne({
-      course_id,
-      user_id,
+      course: course_id,
+      user: user_id,
     });
 
     enrollment.mte_score = mte_score;
@@ -104,8 +104,8 @@ export const updateGrade = async (
     const { course_id, user_id, mte_score, ete_score } = req.body;
 
     const enrollment: EnrollmentType = await Enrollment.findOne({
-      course_id,
-      user_id,
+      course: course_id,
+      user: user_id,
     });
 
     enrollment.mte_score = mte_score;
