@@ -73,7 +73,8 @@ export const addGrade = async (
   next: NextFunction
 ) => {
   try {
-    const { course_id, user_id, mte_score, ete_score } = req.body;
+    const { course_id, user_id, mte_score, ete_score, cws_score, prs_score } =
+      req.body;
 
     const enrollment: EnrollmentType = await Enrollment.findOne({
       course: course_id,
@@ -82,6 +83,8 @@ export const addGrade = async (
 
     enrollment.mte_score = mte_score;
     enrollment.ete_score = ete_score;
+    enrollment.cws_score = cws_score;
+    enrollment.prs_score = prs_score;
 
     await enrollment.save();
 
@@ -101,7 +104,8 @@ export const updateGrade = async (
   next: NextFunction
 ) => {
   try {
-    const { course_id, user_id, mte_score, ete_score } = req.body;
+    const { course_id, user_id, mte_score, ete_score, cws_score, prs_score } =
+      req.body;
 
     const enrollment: EnrollmentType = await Enrollment.findOne({
       course: course_id,
@@ -110,6 +114,8 @@ export const updateGrade = async (
 
     enrollment.mte_score = mte_score;
     enrollment.ete_score = ete_score;
+    enrollment.cws_score = cws_score;
+    enrollment.prs_score = prs_score;
 
     await enrollment.save();
 
@@ -138,6 +144,8 @@ export const removeGrade = async (
 
     enrollment.mte_score = null;
     enrollment.ete_score = null;
+    enrollment.cws_score = null;
+    enrollment.prs_score = null;
 
     await enrollment.save();
 
