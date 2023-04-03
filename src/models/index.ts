@@ -8,3 +8,4 @@ export * as Semester from "./semester";
 export * as Enrollment from "./enrollment";
 export * as Student from "./student";
 export * as Teacher from "./teacher";
+export * as Grade from "./grades";

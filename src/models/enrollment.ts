@@ -1,5 +1,5 @@
 import mongoose, { Schema, Types } from "mongoose";
-import { COURSE, ENROLLMENT, PAYMENT, SEMESTER, USER } from "../utils/models";
+import { COURSE, ENROLLMENT, GRADE, SEMESTER, USER } from "../utils/models";
 
 export interface EnrollmentType extends mongoose.Document {
   course: Types.ObjectId;
@@ -40,6 +40,10 @@ const enrollmentSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: SEMESTER,
       required: true,
+    },
+    grade: {
+      type: Schema.Types.ObjectId,
+      ref: GRADE,
     },
   },
   { timestamps: true }

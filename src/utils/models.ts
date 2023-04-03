@@ -10,3 +10,4 @@ export const PAYMENT = "Payment";
 export const COURSE = "Course";
 export const SEMESTER = "Semester";
 export const ENROLLMENT = "Enrollment";
+export const GRADE = "Grade";

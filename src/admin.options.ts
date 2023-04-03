@@ -13,6 +13,7 @@ import {
   Enrollment,
   Student,
   Teacher,
+  Grade,
 } from "./models";
 AdminBro.registerAdapter(AdminBroMongoose);
 
@@ -27,6 +28,7 @@ const options = {
     Enrollment.default,
     Student.default,
     Teacher.default,
+    Grade.default,
     {
       resource: AdminBroUser.default,
       options: {
