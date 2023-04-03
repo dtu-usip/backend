@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import Grade, { GradeType } from "../models/grades";
 import Enrollment, { EnrollmentType } from "../models/enrollment";
 import ExpressError from "../utils/ExpressError";
 
@@ -85,6 +86,19 @@ export const addGrade = async (
     enrollment.ete_score = ete_score;
     enrollment.cws_score = cws_score;
     enrollment.prs_score = prs_score;
+
+    // get total score
+    const total = mte_score + ete_score + cws_score + prs_score;
+
+    const grade: GradeType = await Grade.findOne({
+      course: course_id,
+      starts_from: { $lte: total },
+      ends_at: { $gte: total },
+    });
+
+    if (grade) {
+      enrollment.grade = grade._id;
+    }
 
     await enrollment.save();
 

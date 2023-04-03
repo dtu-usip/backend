@@ -8,6 +8,7 @@ export interface EnrollmentType extends mongoose.Document {
   prs_score: number;
   mte_score: number;
   ete_score: number;
+  grade: Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
 }
